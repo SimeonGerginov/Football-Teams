@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace FootballTeams.Models
 {
@@ -11,10 +12,13 @@ namespace FootballTeams.Models
             this.teams = new HashSet<Team>();
         }
 
+        [XmlAttribute("stadium_id")]
         public int Id { get; set; }
 
+        [XmlElement("stadium_name")]
         public string Name { get; set; }
 
+        [XmlElement("capacity")]
         public int Capacity { get; set; }
 
         public ICollection<Team> Teams

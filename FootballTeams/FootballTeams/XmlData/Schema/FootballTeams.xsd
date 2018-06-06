@@ -109,10 +109,10 @@
       <xs:sequence>
         <xs:element ref="player_first_name"/>
         <xs:element ref="player_last_name"/>
-        <xs:element ref="age"/>
+        <xs:element ref="player_age"/>
         <xs:element ref="won_trophies"/>
       </xs:sequence>
-      <xs:attribute name="id" use="required" type="xs:integer"/>
+      <xs:attribute name="player_id" use="required" type="xs:integer"/>
       <xs:attribute name="position" use="required" type="xs:string"/>
 	  <xs:attribute name="nationality" use="required" type="xs:string"/>
 	  <xs:attribute name="team_id" use="required" type="xs:string"/>
@@ -120,6 +120,6 @@
   </xs:element>
   <xs:element name="player_first_name" type="xs:string"/>
   <xs:element name="player_last_name" type="xs:string"/>
-  <xs:element name="age" type="xs:integer"/>
+  <xs:element name="player_age" type="xs:integer"/>
   <xs:element name="won_trophies" type="xs:integer"/>
 </xs:schema>
