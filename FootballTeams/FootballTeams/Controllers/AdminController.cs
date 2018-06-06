@@ -44,7 +44,7 @@ namespace FootballTeams.Controllers
         {
             var countriesSelectList = this.adminService
                 .GetAllCountries()
-                .Select(c => new SelectListItem() { Text = c.Name, Value = c.Id.ToString() });
+                .Select(c => new SelectListItem() { Text = c.Name, Value = c.Name });
 
             var cityVm = new CityViewModel()
             {
