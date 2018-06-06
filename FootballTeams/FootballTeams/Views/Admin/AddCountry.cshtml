@@ -1,0 +1,25 @@
+﻿@model FootballTeams.ViewModels.CountryViewModel
+@{
+    ViewData["Title"] = "AddCountry";
+}
+
+<h1>Add Country</h1>
+
+<form asp-action="AddCountry" method="post">
+    <div class="form-group">
+        <label asp-for="@Model.Name" class="control-label"></label>
+        <input asp-for="@Model.Name" class="form-control"/>
+        <span asp-validation-for="@Model.Name" class="text-danger"></span>
+    </div>
+    
+    <div class="form-group">
+        <input type="submit" value="Add Country" class="btn btn-default"/>
+    </div>
+    
+    @Html.AntiForgeryToken()
+</form>
+
+@section Scripts
+{
+    @Html.Partial("_ValidationScriptsPartial")
+}

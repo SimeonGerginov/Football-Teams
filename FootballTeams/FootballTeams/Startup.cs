@@ -26,14 +26,21 @@ namespace FootballTeams
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped(typeof(IRepository<>), typeof(EfCoreRepository<>));
+            // data services
+            services.AddScoped<IAdminService, AdminService>();
             services.AddScoped<ITeamService, TeamService>();
+
+            // db services
+            services.AddScoped(typeof(IRepository<>), typeof(EfCoreRepository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
             services.AddDbContext<FootballTeamsContext>(cfg =>
                 cfg.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            // filter services
+            services.AddScoped<SaveChangesFilter>();
+
             // Add framework services
-            services.AddMvc(setup => { setup.Filters.AddService(typeof(SaveChangesFilter)); });
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,6 +1,9 @@
 ﻿using System;
+
+using FootballTeams.Infrastructure.Filters;
 using FootballTeams.Services.Contracts;
 using FootballTeams.ViewModels;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace FootballTeams.Controllers
@@ -11,12 +14,7 @@ namespace FootballTeams.Controllers
 
         public AdminController(IAdminService adminService)
         {
-            if (adminService == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            this.adminService = adminService;
+            this.adminService = adminService ?? throw new ArgumentNullException();
         }
 
         [HttpGet]
@@ -27,18 +25,17 @@ namespace FootballTeams.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ServiceFilter(typeof(SaveChangesFilter))]
         public IActionResult AddCountry(CountryViewModel countryVm)
         {
-            if (this.ModelState.IsValid)
-            {
-                this.adminService.AddCountryToDb(countryVm);
-
-                return this.RedirectToAction("Index", "Home");
-            }
-            else
+            if (!this.ModelState.IsValid)
             {
                 return this.View(countryVm);
             }
+
+            this.adminService.AddCountryToDb(countryVm);
+
+            return this.RedirectToAction("Index", "Home");
         }
     }
 }
