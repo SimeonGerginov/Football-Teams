@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Xml.Serialization;
 
 namespace FootballTeams.Models
@@ -15,9 +16,12 @@ namespace FootballTeams.Models
         }
 
         [XmlAttribute("country_id")]
+        [Key]
         public int Id { get; set; }
 
         [XmlElement("country_name")]
+        [Required]
+        [MaxLength(30)]
         public string Name { get; set; }
 
         public ICollection<City> Cities

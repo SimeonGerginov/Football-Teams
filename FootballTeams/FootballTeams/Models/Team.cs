@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Xml.Serialization;
 
 namespace FootballTeams.Models
@@ -15,27 +16,39 @@ namespace FootballTeams.Models
         }
 
         [XmlAttribute("team_id")]
+        [Key]
         public int Id { get; set; }
 
         [XmlElement("name")]
+        [Required]
+        [MaxLength(30)]
         public string Name { get; set; }
 
         [XmlElement("alias")]
+        [Required]
+        [MaxLength(30)]
         public string Alias { get; set; }
 
         [XmlElement("established")]
+        [Required]
         public int Established { get; set; }
 
         [XmlElement("region")]
+        [Required]
+        [MaxLength(20)]
         public string Region { get; set; }
 
         [XmlElement("division")]
+        [Required]
+        [MaxLength(15)]
         public string Division { get; set; }
 
         [XmlElement("trophies")]
         public int? Trophies { get; set; }
 
         [XmlElement("captain")]
+        [Required]
+        [MaxLength(30)]
         public string Captain { get; set; }
 
         [XmlElement("played_matches")]

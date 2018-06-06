@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Xml.Serialization;
 
 namespace FootballTeams.Models
@@ -13,15 +14,21 @@ namespace FootballTeams.Models
         }
 
         [XmlAttribute("president_id")]
+        [Key]
         public int Id { get; set; }
 
         [XmlElement("president_first_name")]
+        [Required]
+        [MaxLength(30)]
         public string FirstName { get; set; }
 
         [XmlElement("president_last_name")]
+        [Required]
+        [MaxLength(30)]
         public string LastName { get; set; }
 
         [XmlAttribute("president_age")]
+        [Required]
         public int Age { get; set; }
 
         public ICollection<Team> Teams
