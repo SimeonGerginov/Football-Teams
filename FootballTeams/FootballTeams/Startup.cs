@@ -1,9 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using FootballTeams.Data;
+using FootballTeams.Repositories;
+using FootballTeams.Repositories.Contracts;
+using FootballTeams.Services;
+using FootballTeams.Services.Contracts;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -21,6 +24,12 @@ namespace FootballTeams
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped(typeof(IRepository<>), typeof(EfCoreRepository<>));
+            services.AddScoped<ITeamService, TeamService>();
+            services.AddDbContext<FootballTeamsContext>(cfg =>
+                cfg.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            // Add framework services
             services.AddMvc();
         }
 
