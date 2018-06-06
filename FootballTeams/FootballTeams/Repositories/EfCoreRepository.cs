@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 using FootballTeams.Data;
 using FootballTeams.Repositories.Contracts;
@@ -34,6 +35,13 @@ namespace FootballTeams.Repositories
         public IEnumerable<T> GetAll()
         {
             return this.set.AsEnumerable();
+        }
+
+        public IEnumerable<T> GetAllFiltered(Expression<Func<T, bool>> filterExpression)
+        {
+            return this.set
+                .Where(filterExpression)
+                .AsEnumerable();
         }
 
         public void Add(T entity)

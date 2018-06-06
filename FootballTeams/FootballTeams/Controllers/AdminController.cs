@@ -1,10 +1,11 @@
 ﻿using System;
-
+using System.Linq;
 using FootballTeams.Infrastructure.Filters;
 using FootballTeams.Services.Contracts;
 using FootballTeams.ViewModels;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FootballTeams.Controllers
 {
@@ -34,6 +35,36 @@ namespace FootballTeams.Controllers
             }
 
             this.adminService.AddCountryToDb(countryVm);
+
+            return this.RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public IActionResult AddCity()
+        {
+            var countriesSelectList = this.adminService
+                .GetAllCountries()
+                .Select(c => new SelectListItem() { Text = c.Name, Value = c.Id.ToString() });
+
+            var cityVm = new CityViewModel()
+            {
+                CountriesSelectList = countriesSelectList
+            };
+
+            return this.View(cityVm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ServiceFilter(typeof(SaveChangesFilter))]
+        public IActionResult AddCity(CityViewModel cityVm)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(cityVm);
+            }
+
+            this.adminService.AddCityToDb(cityVm, cityVm.CountryName);
 
             return this.RedirectToAction("Index", "Home");
         }

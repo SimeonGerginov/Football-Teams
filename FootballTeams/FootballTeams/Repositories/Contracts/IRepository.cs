@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace FootballTeams.Repositories.Contracts
 {
@@ -7,6 +9,8 @@ namespace FootballTeams.Repositories.Contracts
         T GetById(int id);
 
         IEnumerable<T> GetAll();
+
+        IEnumerable<T> GetAllFiltered(Expression<Func<T, bool>> filterExpression);
 
         void Add(T entity);
     }
