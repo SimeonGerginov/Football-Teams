@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="teams">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" minOccurs="1" ref="team"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="team">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="name"/>
+        <xs:element ref="alias"/>
+        <xs:element ref="established"/>
+        <xs:element ref="stadium"/>
+        <xs:element ref="country"/>
+        <xs:element ref="region"/>
+        <xs:element ref="city"/>
+		<xs:element ref="division"/>
+        <xs:element ref="president"/>
+        <xs:element ref="manager"/>
+        <xs:element ref="trophies"/>
+		<xs:element ref="captain"/>
+		<xs:element ref="played_matches"/>
+        <xs:element ref="won_matches"/>
+        <xs:element ref="lost_matches"/>
+        <xs:element ref="players"/>
+      </xs:sequence>
+      <xs:attribute name="team_id" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="name" type="xs:string"/>
+  <xs:element name="alias" type="xs:string"/>
+  <xs:element name="established" type="xs:integer"/>
+  <xs:element name="stadium">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="stadium_name"/>
+        <xs:element ref="capacity"/>
+      </xs:sequence>
+	  <xs:attribute name="stadium_id" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="stadium_name" type="xs:string" />
+  <xs:element name="capacity" type="xs:integer" />
+  <xs:element name="country">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="country_name"/>
+      </xs:sequence>
+	  <xs:attribute name="country_id" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="country_name" type="xs:string" />
+  <xs:element name="region" type="xs:string" />
+  <xs:element name="city">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="city_name"/>
+      </xs:sequence>
+	  <xs:attribute name="city_id" use="required" type="xs:integer"/>
+      <xs:attribute name="country_id" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="city_name" type="xs:string" />
+  <xs:element name="division" type="xs:string" />
+  <xs:element name="president">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="president_first_name"/>
+        <xs:element ref="president_last_name"/>
+      </xs:sequence>
+	  <xs:attribute name="president_id" use="required" type="xs:integer"/>
+      <xs:attribute name="president_age" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="president_first_name" type="xs:string"/>
+  <xs:element name="president_last_name" type="xs:string"/>
+  <xs:element name="manager">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="manager_first_name"/>
+        <xs:element ref="manager_last_name"/>
+		<xs:element ref="trophies_won"/>
+      </xs:sequence>
+	  <xs:attribute name="manager_id" use="required" type="xs:integer"/>
+      <xs:attribute name="manager_age" use="required" type="xs:integer"/>
+	  <xs:attribute name="team_id" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="manager_first_name" type="xs:string" />
+  <xs:element name="manager_last_name" type="xs:string" />
+  <xs:element name="trophies_won" type="xs:integer" />
+  <xs:element name="trophies" type="xs:integer" />
+  <xs:element name="captain" type="xs:string" />
+  <xs:element name="played_matches" type="xs:integer" />
+  <xs:element name="won_matches" type="xs:integer" />
+  <xs:element name="lost_matches" type="xs:integer" />
+  <xs:element name="players">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="player"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="player">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="player_first_name"/>
+        <xs:element ref="player_last_name"/>
+        <xs:element ref="age"/>
+        <xs:element ref="won_trophies"/>
+      </xs:sequence>
+      <xs:attribute name="id" use="required" type="xs:integer"/>
+      <xs:attribute name="position" use="required" type="xs:string"/>
+	  <xs:attribute name="nationality" use="required" type="xs:string"/>
+	  <xs:attribute name="team_id" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="player_first_name" type="xs:string"/>
+  <xs:element name="player_last_name" type="xs:string"/>
+  <xs:element name="age" type="xs:integer"/>
+  <xs:element name="won_trophies" type="xs:integer"/>
+</xs:schema>
