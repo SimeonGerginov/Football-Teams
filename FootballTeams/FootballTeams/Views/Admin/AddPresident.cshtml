@@ -1,0 +1,41 @@
+﻿@model FootballTeams.ViewModels.PresidentViewModel
+@{
+    ViewData["Title"] = "AddPresident";
+}
+
+<h2>Add Football President</h2>
+
+<div class="row">
+    <div class="col-md-3">
+        <form asp-action="AddPresident" method="post">
+            <div class="form-group">
+                <label asp-for="@Model.FirstName" class="control-label"></label>
+                <input asp-for="@Model.FirstName" class="form-control" />
+                <span asp-validation-for="@Model.FirstName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@Model.LastName" class="control-label"></label>
+                <input asp-for="@Model.LastName" class="form-control" />
+                <span asp-validation-for="@Model.LastName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@Model.Age" class="control-label"></label>
+                <input asp-for="@Model.Age" class="form-control" />
+                <span asp-validation-for="@Model.Age" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Add Stadium" class="btn btn-default" />
+            </div>
+
+            @Html.AntiForgeryToken()
+        </form>
+    </div>
+</div>
+
+@section Scripts
+    {
+    @Html.Partial("_ValidationScriptsPartial")
+}

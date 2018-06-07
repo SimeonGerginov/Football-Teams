@@ -89,5 +89,26 @@ namespace FootballTeams.Controllers
 
             return this.RedirectToAction("Index", "Home");
         }
+
+        [HttpGet]
+        public IActionResult AddPresident()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ServiceFilter(typeof(SaveChangesFilter))]
+        public IActionResult AddPresident(PresidentViewModel presidentVm)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(presidentVm);
+            }
+
+            this.adminService.AddPresidentToDb(presidentVm);
+
+            return this.RedirectToAction("Index", "Home");
+        }
     }
 }

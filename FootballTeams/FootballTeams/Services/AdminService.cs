@@ -14,13 +14,15 @@ namespace FootballTeams.Services
         private readonly IRepository<Country> countryRepository;
         private readonly IRepository<City> cityRepository;
         private readonly IRepository<Stadium> stadiumRepository;
+        private readonly IRepository<FootballPresident> presidentRepository;
 
         public AdminService(IRepository<Country> countryRepository, IRepository<City> cityRepository, 
-            IRepository<Stadium> stadiumRepository)
+            IRepository<Stadium> stadiumRepository, IRepository<FootballPresident> presidentRepository)
         {
             this.countryRepository = countryRepository ?? throw new ArgumentNullException();
             this.cityRepository = cityRepository ?? throw new ArgumentNullException();
             this.stadiumRepository = stadiumRepository ?? throw new ArgumentNullException();
+            this.presidentRepository = presidentRepository ?? throw new ArgumentNullException();
         }
 
         public void AddCountryToDb(CountryViewModel countryVm)
@@ -89,6 +91,28 @@ namespace FootballTeams.Services
             };
 
             this.stadiumRepository.Add(stadium);
+        }
+
+        public void AddPresidentToDb(PresidentViewModel presidentVm)
+        {
+            var presidentExists = this.presidentRepository
+                .GetAllFiltered(p => p.FirstName == presidentVm.FirstName && p.LastName == presidentVm.LastName &&
+                                     p.Age == presidentVm.Age)
+                .Any();
+
+            if (presidentExists)
+            {
+                throw new InvalidOperationException();
+            }
+
+            var president = new FootballPresident()
+            {
+                FirstName = presidentVm.FirstName,
+                LastName = presidentVm.LastName,
+                Age = presidentVm.Age
+            };
+
+            this.presidentRepository.Add(president);
         }
 
         public IEnumerable<Country> GetAllCountries()

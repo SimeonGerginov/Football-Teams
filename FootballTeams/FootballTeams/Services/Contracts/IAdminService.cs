@@ -13,6 +13,8 @@ namespace FootballTeams.Services.Contracts
 
         void AddStadiumToDb(StadiumViewModel stadiumVm);
 
+        void AddPresidentToDb(PresidentViewModel presidentVm);
+
         IEnumerable<Country> GetAllCountries();
     }
 }
