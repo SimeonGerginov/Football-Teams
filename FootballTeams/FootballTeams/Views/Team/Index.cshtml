@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Team>
+
+@{
+    ViewBag.Title = "Teams Page";
+    Layout = "_Layout";
+}
+
+<h2>Admin Panel</h2>
+
+<div class="form-group">
+    <form asp-action="ExportData" method="post">
+        <input type="submit" value="Export Data" class="btn btn-info"/>
+        
+        @Html.AntiForgeryToken()
+    </form>
+</div>

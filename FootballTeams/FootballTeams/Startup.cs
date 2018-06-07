@@ -28,7 +28,7 @@ namespace FootballTeams
         {
             // data services
             services.AddScoped<IAdminService, AdminService>();
-            services.AddScoped<ITeamService, TeamService>();
+            services.AddScoped<IXmlService, XmlService>();
 
             // db services
             services.AddScoped(typeof(IRepository<>), typeof(EfCoreRepository<>));

@@ -2,7 +2,7 @@
 
 namespace FootballTeams.Services.Contracts
 {
-    public interface ITeamService
+    public interface IXmlService
     {
         void WriteTeamToXml(string fileName, Team team);
     }

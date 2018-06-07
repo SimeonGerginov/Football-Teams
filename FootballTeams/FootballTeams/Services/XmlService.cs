@@ -1,13 +1,15 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 
 using FootballTeams.Models;
+using FootballTeams.Repositories.Contracts;
 using FootballTeams.Services.Contracts;
 
 namespace FootballTeams.Services
 {
-    public class TeamService : ITeamService
+    public class XmlService : IXmlService
     {
         public void WriteTeamToXml(string fileName, Team team)
         {

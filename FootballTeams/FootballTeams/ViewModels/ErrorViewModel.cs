@@ -1,6 +1,4 @@
-using System;
-
-namespace FootballTeams.Models
+namespace FootballTeams.ViewModels
 {
     public class ErrorViewModel
     {
