@@ -15,14 +15,17 @@ namespace FootballTeams.Services
         private readonly IRepository<City> cityRepository;
         private readonly IRepository<Stadium> stadiumRepository;
         private readonly IRepository<FootballPresident> presidentRepository;
+        private readonly IRepository<Team> teamRepository;
 
         public AdminService(IRepository<Country> countryRepository, IRepository<City> cityRepository, 
-            IRepository<Stadium> stadiumRepository, IRepository<FootballPresident> presidentRepository)
+            IRepository<Stadium> stadiumRepository, IRepository<FootballPresident> presidentRepository,
+            IRepository<Team> teamRepository)
         {
             this.countryRepository = countryRepository ?? throw new ArgumentNullException();
             this.cityRepository = cityRepository ?? throw new ArgumentNullException();
             this.stadiumRepository = stadiumRepository ?? throw new ArgumentNullException();
             this.presidentRepository = presidentRepository ?? throw new ArgumentNullException();
+            this.teamRepository = teamRepository ?? throw new ArgumentNullException();
         }
 
         public void AddCountryToDb(CountryViewModel countryVm)
@@ -52,7 +55,7 @@ namespace FootballTeams.Services
 
             if (country == null)
             {
-                throw new InvalidOperationException();
+                throw new ArgumentNullException();
             }
 
             var cityExists = this.cityRepository
@@ -115,9 +118,92 @@ namespace FootballTeams.Services
             this.presidentRepository.Add(president);
         }
 
+        public void AddTeamToDb(TeamViewModel teamVm, string stadiumName, string cityName, string countryName, int presidentId)
+        {
+            var stadium = this.stadiumRepository
+                .GetAllFiltered(s => s.Name == stadiumName)
+                .FirstOrDefault();
+
+            if (stadium == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            var country = this.countryRepository
+                .GetAllFiltered(c => c.Name == countryName)
+                .FirstOrDefault();
+
+            if (country == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            var city = this.cityRepository
+                .GetAllFiltered(c => c.Name == cityName && c.CountryId == country.Id)
+                .FirstOrDefault();
+
+            if (city == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            var president = this.presidentRepository
+                .GetById(presidentId);
+
+            if (president == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            var teamExists = this.teamRepository
+                .GetAllFiltered(t => t.Name == teamVm.Name && t.Alias == teamVm.Alias
+                                                           && t.Division == teamVm.Division)
+                .Any();
+
+            if (teamExists)
+            {
+                throw new InvalidOperationException();
+            }
+
+            var team = new Team()
+            {
+                Name = teamVm.Name,
+                Alias = teamVm.Alias,
+                Captain = teamVm.Captain,
+                CityId = city.Id,
+                CountryId = country.Id,
+                Division = teamVm.Division,
+                Established = teamVm.Established,
+                Region = teamVm.Region,
+                Trophies = teamVm.Trophies,
+                PlayedMatches = teamVm.PlayedMatches,
+                WonMatches = teamVm.WonMatches,
+                LostMatches = teamVm.LostMatches,
+                StadiumId = stadium.Id,
+                FootballPresidentId = president.Id
+            };
+
+            this.teamRepository.Add(team);
+        }
+
         public IEnumerable<Country> GetAllCountries()
         {
             return this.countryRepository.GetAll();
+        }
+
+        public IEnumerable<Stadium> GetAllStadiums()
+        {
+            return this.stadiumRepository.GetAll();
+        }
+
+        public IEnumerable<City> GetAllCities()
+        {
+            return this.cityRepository.GetAll();
+        }
+
+        public IEnumerable<FootballPresident> GetAllPresidents()
+        {
+            return this.presidentRepository.GetAll();
         }
     }
 }
