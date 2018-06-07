@@ -18,6 +18,8 @@ namespace FootballTeams.Services.Contracts
         void AddTeamToDb(TeamViewModel teamVm, string stadiumName, string cityName, string countryName,
             int presidentId);
 
+        void AddManagerToDb(ManagerViewModel managerVm, int teamId);
+
         IEnumerable<Country> GetAllCountries();
 
         IEnumerable<Stadium> GetAllStadiums();
@@ -25,5 +27,7 @@ namespace FootballTeams.Services.Contracts
         IEnumerable<City> GetAllCities();
 
         IEnumerable<FootballPresident> GetAllPresidents();
+
+        IEnumerable<Team> GetAllTeams();
     }
 }

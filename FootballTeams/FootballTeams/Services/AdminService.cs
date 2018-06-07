@@ -16,16 +16,18 @@ namespace FootballTeams.Services
         private readonly IRepository<Stadium> stadiumRepository;
         private readonly IRepository<FootballPresident> presidentRepository;
         private readonly IRepository<Team> teamRepository;
+        private readonly IRepository<FootballManager> managerRepository;
 
         public AdminService(IRepository<Country> countryRepository, IRepository<City> cityRepository, 
             IRepository<Stadium> stadiumRepository, IRepository<FootballPresident> presidentRepository,
-            IRepository<Team> teamRepository)
+            IRepository<Team> teamRepository, IRepository<FootballManager> managerRepository)
         {
             this.countryRepository = countryRepository ?? throw new ArgumentNullException();
             this.cityRepository = cityRepository ?? throw new ArgumentNullException();
             this.stadiumRepository = stadiumRepository ?? throw new ArgumentNullException();
             this.presidentRepository = presidentRepository ?? throw new ArgumentNullException();
             this.teamRepository = teamRepository ?? throw new ArgumentNullException();
+            this.managerRepository = managerRepository ?? throw new ArgumentNullException();
         }
 
         public void AddCountryToDb(CountryViewModel countryVm)
@@ -186,6 +188,38 @@ namespace FootballTeams.Services
             this.teamRepository.Add(team);
         }
 
+        public void AddManagerToDb(ManagerViewModel managerVm, int teamId)
+        {
+            var team = this.teamRepository
+                .GetById(teamId);
+
+            if (team == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            var managerExists = this.managerRepository
+                .GetAllFiltered(m => m.FirstName == managerVm.FirstName && m.LastName == managerVm.LastName
+                                                                        && m.TeamId == team.Id)
+                .Any();
+
+            if (managerExists)
+            {
+                throw new InvalidOperationException();
+            }
+
+            var manager = new FootballManager()
+            {
+                FirstName = managerVm.FirstName,
+                LastName = managerVm.LastName,
+                Age = managerVm.Age,
+                TeamId = team.Id,
+                TrophiesWon = managerVm.TrophiesWon
+            };
+
+            this.managerRepository.Add(manager);
+        }
+
         public IEnumerable<Country> GetAllCountries()
         {
             return this.countryRepository.GetAll();
@@ -204,6 +238,11 @@ namespace FootballTeams.Services
         public IEnumerable<FootballPresident> GetAllPresidents()
         {
             return this.presidentRepository.GetAll();
+        }
+
+        public IEnumerable<Team> GetAllTeams()
+        {
+            return this.teamRepository.GetAll();
         }
     }
 }

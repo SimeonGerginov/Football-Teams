@@ -161,5 +161,37 @@ namespace FootballTeams.Controllers
 
             return this.RedirectToAction("Index", "Home");
         }
+
+        [HttpGet]
+        public IActionResult AddManager()
+        {
+            var teamsSelectList = this.adminService
+                .GetAllTeams()
+                .Select(t => new SelectListItem() { Text = t.Name, Value = t.Id.ToString() });
+
+            var managerViewModel = new ManagerViewModel()
+            {
+                TeamsSelectList = teamsSelectList
+            };
+
+            return this.View(managerViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ServiceFilter(typeof(SaveChangesFilter))]
+        public IActionResult AddManager(ManagerViewModel managerVm)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(managerVm);
+            }
+
+            var teamId = managerVm.TeamId;
+
+            this.adminService.AddManagerToDb(managerVm, teamId);
+
+            return this.RedirectToAction("Index", "Home");
+        }
     }
 }
