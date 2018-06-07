@@ -17,10 +17,12 @@ namespace FootballTeams.Services
         private readonly IRepository<FootballPresident> presidentRepository;
         private readonly IRepository<Team> teamRepository;
         private readonly IRepository<FootballManager> managerRepository;
+        private readonly IRepository<FootballPlayer> playerRepository;
 
         public AdminService(IRepository<Country> countryRepository, IRepository<City> cityRepository, 
             IRepository<Stadium> stadiumRepository, IRepository<FootballPresident> presidentRepository,
-            IRepository<Team> teamRepository, IRepository<FootballManager> managerRepository)
+            IRepository<Team> teamRepository, IRepository<FootballManager> managerRepository,
+            IRepository<FootballPlayer> playerRepository)
         {
             this.countryRepository = countryRepository ?? throw new ArgumentNullException();
             this.cityRepository = cityRepository ?? throw new ArgumentNullException();
@@ -28,6 +30,7 @@ namespace FootballTeams.Services
             this.presidentRepository = presidentRepository ?? throw new ArgumentNullException();
             this.teamRepository = teamRepository ?? throw new ArgumentNullException();
             this.managerRepository = managerRepository ?? throw new ArgumentNullException();
+            this.playerRepository = playerRepository ?? throw new ArgumentNullException();
         }
 
         public void AddCountryToDb(CountryViewModel countryVm)
@@ -218,6 +221,40 @@ namespace FootballTeams.Services
             };
 
             this.managerRepository.Add(manager);
+        }
+
+        public void AddPlayerToDb(PlayerViewModel playerVm, int teamId)
+        {
+            var team = this.teamRepository
+                .GetById(teamId);
+
+            if (team == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            var playerExists = this.playerRepository
+                .GetAllFiltered(p => p.FirstName == playerVm.FirstName && p.LastName == playerVm.LastName
+                                                                       && p.TeamId == team.Id)
+                .Any();
+
+            if (playerExists)
+            {
+                throw new InvalidOperationException();
+            }
+
+            var player = new FootballPlayer()
+            {
+                FirstName = playerVm.FirstName,
+                LastName = playerVm.LastName,
+                Age = playerVm.Age,
+                TrophiesWon = playerVm.TrophiesWon,
+                Nationality = playerVm.Nationality,
+                Position = playerVm.Position,
+                TeamId = team.Id
+            };
+
+            this.playerRepository.Add(player);
         }
 
         public IEnumerable<Country> GetAllCountries()

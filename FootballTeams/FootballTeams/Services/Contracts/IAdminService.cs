@@ -20,6 +20,8 @@ namespace FootballTeams.Services.Contracts
 
         void AddManagerToDb(ManagerViewModel managerVm, int teamId);
 
+        void AddPlayerToDb(PlayerViewModel playerVm, int teamId);
+
         IEnumerable<Country> GetAllCountries();
 
         IEnumerable<Stadium> GetAllStadiums();
