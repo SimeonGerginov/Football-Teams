@@ -13,11 +13,14 @@ namespace FootballTeams.Services
     {
         private readonly IRepository<Country> countryRepository;
         private readonly IRepository<City> cityRepository;
+        private readonly IRepository<Stadium> stadiumRepository;
 
-        public AdminService(IRepository<Country> countryRepository, IRepository<City> cityRepository)
+        public AdminService(IRepository<Country> countryRepository, IRepository<City> cityRepository, 
+            IRepository<Stadium> stadiumRepository)
         {
             this.countryRepository = countryRepository ?? throw new ArgumentNullException();
             this.cityRepository = cityRepository ?? throw new ArgumentNullException();
+            this.stadiumRepository = stadiumRepository ?? throw new ArgumentNullException();
         }
 
         public void AddCountryToDb(CountryViewModel countryVm)
@@ -66,6 +69,26 @@ namespace FootballTeams.Services
             };
 
             this.cityRepository.Add(city);
+        }
+
+        public void AddStadiumToDb(StadiumViewModel stadiumVm)
+        {
+            var stadiumExists = this.stadiumRepository
+                .GetAllFiltered(s => s.Name == stadiumVm.Name && s.Capacity == stadiumVm.Capacity)
+                .Any();
+
+            if (stadiumExists)
+            {
+                throw new InvalidOperationException();
+            }
+
+            var stadium = new Stadium()
+            {
+                Name = stadiumVm.Name,
+                Capacity = stadiumVm.Capacity
+            };
+
+            this.stadiumRepository.Add(stadium);
         }
 
         public IEnumerable<Country> GetAllCountries()

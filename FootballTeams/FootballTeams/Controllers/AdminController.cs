@@ -68,5 +68,26 @@ namespace FootballTeams.Controllers
 
             return this.RedirectToAction("Index", "Home");
         }
+
+        [HttpGet]
+        public IActionResult AddStadium()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ServiceFilter(typeof(SaveChangesFilter))]
+        public IActionResult AddStadium(StadiumViewModel stadiumVm)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(stadiumVm);
+            }
+
+            this.adminService.AddStadiumToDb(stadiumVm);
+
+            return this.RedirectToAction("Index", "Home");
+        }
     }
 }

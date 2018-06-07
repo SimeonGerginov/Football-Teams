@@ -1,13 +1,13 @@
-﻿@model FootballTeams.ViewModels.CityViewModel
+﻿@model FootballTeams.ViewModels.StadiumViewModel
 @{
-    ViewData["Title"] = "AddCity";
+    ViewData["Title"] = "AddStadium";
 }
 
-<h2>Add City</h2>
+<h2>Add Stadium</h2>
 
 <div class="row">
     <div class="col-md-3">
-        <form asp-action="AddCity" method="post">
+        <form asp-action="AddStadium" method="post">
             <div class="form-group">
                 <label asp-for="@Model.Name" class="control-label"></label>
                 <input asp-for="@Model.Name" class="form-control" />
@@ -15,13 +15,13 @@
             </div>
             
             <div class="form-group">
-                <label asp-for="@Model.CountryName" class="control-label"></label>
-                <select asp-for="@Model.CountryName" asp-items="@Model.CountriesSelectList"></select>
-                <span asp-validation-for="@Model.CountryName" class="text-danger"></span>
+                <label asp-for="@Model.Capacity" class="control-label"></label>
+                <input asp-for="@Model.Capacity" class="form-control" />
+                <span asp-validation-for="@Model.Capacity" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Add City" class="btn btn-default" />
+                <input type="submit" value="Add Stadium" class="btn btn-default" />
             </div>
 
             @Html.AntiForgeryToken()
@@ -30,6 +30,6 @@
 </div>
 
 @section Scripts
-    {
+{
     @Html.Partial("_ValidationScriptsPartial")
 }

@@ -11,6 +11,8 @@ namespace FootballTeams.Services.Contracts
 
         void AddCityToDb(CityViewModel cityVm, string countryName);
 
+        void AddStadiumToDb(StadiumViewModel stadiumVm);
+
         IEnumerable<Country> GetAllCountries();
     }
 }
