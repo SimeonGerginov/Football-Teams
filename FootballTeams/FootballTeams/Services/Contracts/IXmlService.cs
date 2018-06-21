@@ -6,6 +6,6 @@ namespace FootballTeams.Services.Contracts
     {
         void WriteTeamToXml(string fileName, Team team);
 
-        // Team ReadFromXml(string fileName);
+        Team ReadTeamFromXml(string fileName);
     }
 }

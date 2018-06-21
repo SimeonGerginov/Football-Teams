@@ -30,6 +30,7 @@ namespace FootballTeams
             services.AddScoped<IAdminService, AdminService>();
             services.AddScoped<IDtoService, DtoService>();
             services.AddScoped<IXmlService, XmlService>();
+            services.AddScoped<ITeamService, TeamService>();
 
             // db services
             services.AddScoped(typeof(IRepository<>), typeof(EfCoreRepository<>));

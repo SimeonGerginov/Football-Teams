@@ -20,17 +20,27 @@ namespace FootballTeams.Services
             {
                 Name = team.Name,
                 Alias = team.Alias,
+                Established = team.Established,
+                Region = team.Region,
+                Division = team.Division,
+                Trophies = team.Trophies,
+                PlayedMatches = team.PlayedMatches,
+                WonMatches = team.WonMatches,
+                LostMatches = team.LostMatches,
                 City = cityDto,
                 Captain = team.Captain,
                 Country = countryDto,
-                Division = team.Division,
-                Established = team.Established,
                 FootballPresident = presidentDto,
                 FootballManagers = managersDto,
                 FootballPlayers = playersDto
             };
 
             return teamDto;
+        }
+
+        public Team CreateTeamFromDto(TeamDto teamDto)
+        {
+            throw new System.NotImplementedException();
         }
 
         private CityDto CreateCityDto(City city)

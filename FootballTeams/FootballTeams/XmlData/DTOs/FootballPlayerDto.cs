@@ -2,7 +2,7 @@
 
 namespace FootballTeams.XmlData.DTOs
 {
-    [XmlRoot(ElementName = "player")]
+    [XmlType(TypeName = "player")]
     public class FootballPlayerDto
     {
         [XmlAttribute(AttributeName = "player_id")]

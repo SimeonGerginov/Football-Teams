@@ -38,5 +38,27 @@ namespace FootballTeams.Services
                 xmlSerializer.Serialize(writer, teamDto, namespaces);
             }
         }
+
+        public Team ReadTeamFromXml(string fileName)
+        {
+            Team team;
+            var settings = new XmlReaderSettings();
+
+            settings.DtdProcessing = DtdProcessing.Parse;
+            settings.ValidationType = ValidationType.DTD;
+            settings.XmlResolver = new XmlUrlResolver();
+            settings.CloseInput = true;
+
+            var fileStream = new FileStream(fileName, FileMode.Open);
+
+            using (var reader = XmlReader.Create(fileStream, settings))
+            {
+                var xmlSerializer = new XmlSerializer(typeof(TeamDto));
+                var teamDto = (TeamDto)xmlSerializer.Deserialize(reader);
+                team = this.dtoService.CreateTeamFromDto(teamDto);
+            }
+
+            return team;
+        }
     }
 }

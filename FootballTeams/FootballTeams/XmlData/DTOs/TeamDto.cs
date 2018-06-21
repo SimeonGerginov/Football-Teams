@@ -61,6 +61,7 @@ namespace FootballTeams.XmlData.DTOs
         public FootballPresidentDto FootballPresident { get; set; }
 
         [XmlArray(ElementName = "managers")]
+        [XmlArrayItem(ElementName = "manager")]
         public HashSet<FootballManagerDto> FootballManagers
         {
             get { return this.managers; }
@@ -68,6 +69,7 @@ namespace FootballTeams.XmlData.DTOs
         }
 
         [XmlArray(ElementName = "players")]
+        [XmlArrayItem(ElementName = "player")]
         public HashSet<FootballPlayerDto> FootballPlayers
         {
             get { return this.players; }
