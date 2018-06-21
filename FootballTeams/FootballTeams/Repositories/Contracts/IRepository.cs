@@ -12,6 +12,8 @@ namespace FootballTeams.Repositories.Contracts
 
         IEnumerable<T> GetAllFiltered(Expression<Func<T, bool>> filterExpression);
 
+        IEnumerable<T> GetAllOrdered(Func<T, object> orderByFunc);
+
         void Add(T entity);
     }
 }

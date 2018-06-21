@@ -44,6 +44,13 @@ namespace FootballTeams.Repositories
                 .AsEnumerable();
         }
 
+        public IEnumerable<T> GetAllOrdered(Func<T, object> orderByFunc)
+        {
+            return this.set
+                .OrderBy(orderByFunc)
+                .AsEnumerable();
+        }
+
         public void Add(T entity)
         {
             this.set.Add(entity);

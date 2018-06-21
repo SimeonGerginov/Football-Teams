@@ -259,27 +259,27 @@ namespace FootballTeams.Services
 
         public IEnumerable<Country> GetAllCountries()
         {
-            return this.countryRepository.GetAll();
+            return this.countryRepository.GetAllOrdered(c => c.Name);
         }
 
         public IEnumerable<Stadium> GetAllStadiums()
         {
-            return this.stadiumRepository.GetAll();
+            return this.stadiumRepository.GetAllOrdered(s => s.Name);
         }
 
         public IEnumerable<City> GetAllCities()
         {
-            return this.cityRepository.GetAll();
+            return this.cityRepository.GetAllOrdered(c => c.Name);
         }
 
         public IEnumerable<FootballPresident> GetAllPresidents()
         {
-            return this.presidentRepository.GetAll();
+            return this.presidentRepository.GetAllOrdered(p => p.FirstName);
         }
 
         public IEnumerable<Team> GetAllTeams()
         {
-            return this.teamRepository.GetAll();
+            return this.teamRepository.GetAllOrdered(t => t.Name);
         }
     }
 }
