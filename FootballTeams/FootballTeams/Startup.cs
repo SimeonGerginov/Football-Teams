@@ -28,6 +28,7 @@ namespace FootballTeams
         {
             // data services
             services.AddScoped<IAdminService, AdminService>();
+            services.AddScoped<IDtoService, DtoService>();
             services.AddScoped<IXmlService, XmlService>();
 
             // db services

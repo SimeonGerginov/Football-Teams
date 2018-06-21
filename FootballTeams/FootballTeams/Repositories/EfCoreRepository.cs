@@ -32,9 +32,9 @@ namespace FootballTeams.Repositories
             return this.set.Find(id);
         }
 
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetAllAndIncludeEntities(IEnumerable<string> entitiesToInclude)
         {
-            return this.set.AsEnumerable();
+            throw new NotImplementedException();
         }
 
         public IEnumerable<T> GetAllFiltered(Expression<Func<T, bool>> filterExpression)
