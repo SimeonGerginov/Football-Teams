@@ -8,7 +8,7 @@ namespace FootballTeams.Repositories.Contracts
     {
         T GetById(int id);
 
-        IEnumerable<T> GetAllAndIncludeEntities(IEnumerable<string> entitiesToInclude);
+        IEnumerable<T> GetAllAndIncludeEntities(string entity, string[] entitiesToInclude);
 
         IEnumerable<T> GetAllFiltered(Expression<Func<T, bool>> filterExpression);
 

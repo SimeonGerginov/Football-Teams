@@ -21,6 +21,6 @@ namespace FootballTeams.XmlData.DTOs
         public int? TrophiesWon { get; set; }
 
         [XmlAttribute(AttributeName = "team_id")]
-        public int? TeamId { get; set; }
+        public int TeamId { get; set; }
     }
 }

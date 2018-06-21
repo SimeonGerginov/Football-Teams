@@ -32,9 +32,22 @@ namespace FootballTeams.Repositories
             return this.set.Find(id);
         }
 
-        public IEnumerable<T> GetAllAndIncludeEntities(IEnumerable<string> entitiesToInclude)
+        public IEnumerable<T> GetAllAndIncludeEntities(string entity, string[] entitiesToInclude)
         {
-            throw new NotImplementedException();
+            // Include City, Country and President if entity is team.
+            if (entity == "team")
+            {
+                return this.set
+                    .Include(entitiesToInclude[0])
+                    .Include(entitiesToInclude[1])
+                    .Include(entitiesToInclude[2])
+                    .AsEnumerable();
+            }
+            else
+            {
+                return this.set
+                    .AsEnumerable();
+            }
         }
 
         public IEnumerable<T> GetAllFiltered(Expression<Func<T, bool>> filterExpression)

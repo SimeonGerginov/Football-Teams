@@ -16,6 +16,6 @@ namespace FootballTeams.XmlData.DTOs
         public string Name { get; set; }
 
         [XmlAttribute(AttributeName = "country_id")]
-        public int? CountryId { get; set; }
+        public int CountryId { get; set; }
     }
 }

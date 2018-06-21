@@ -39,7 +39,7 @@ namespace FootballTeams.Services
             {
                 Id = city.Id,
                 Name = city.Name,
-                CountryId = city.CountryId
+                CountryId = (int)city.CountryId
             };
 
             return cityDto;
@@ -77,16 +77,16 @@ namespace FootballTeams.Services
                 FirstName = manager.FirstName,
                 LastName = manager.LastName,
                 Age = manager.Age,
-                TeamId = manager.TeamId,
+                TeamId = (int)manager.TeamId,
                 TrophiesWon = manager.TrophiesWon
             };
 
             return managerDto;
         }
 
-        private ICollection<FootballManagerDto> CreateManagerDtoCollection(ICollection<FootballManager> managers)
+        private HashSet<FootballManagerDto> CreateManagerDtoCollection(ICollection<FootballManager> managers)
         {
-            var managersDto = new List<FootballManagerDto>();
+            var managersDto = new HashSet<FootballManagerDto>();
 
             foreach (var manager in managers)
             {
@@ -108,15 +108,15 @@ namespace FootballTeams.Services
                 Nationality = player.Nationality,
                 Position = player.Position,
                 TrophiesWon = player.TrophiesWon,
-                TeamId = player.TeamId
+                TeamId = (int)player.TeamId
             };
 
             return playerDto;
         }
 
-        private ICollection<FootballPlayerDto> CreatePlayerDtoCollection(ICollection<FootballPlayer> players)
+        private HashSet<FootballPlayerDto> CreatePlayerDtoCollection(ICollection<FootballPlayer> players)
         {
-            var playersDto = new List<FootballPlayerDto>();
+            var playersDto = new HashSet<FootballPlayerDto>();
 
             foreach (var player in players)
             {

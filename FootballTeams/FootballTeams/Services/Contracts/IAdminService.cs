@@ -30,6 +30,12 @@ namespace FootballTeams.Services.Contracts
 
         IEnumerable<FootballPresident> GetAllPresidents();
 
+        ICollection<FootballPlayer> GetAllPlayersOfTeam(int teamId);
+
+        ICollection<FootballManager> GetAllManagersOfTeam(int teamId);
+
         IEnumerable<Team> GetAllTeams();
+
+        IEnumerable<Team> GetAllTeamsWithIncludedEntities();
     }
 }

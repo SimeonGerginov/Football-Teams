@@ -277,9 +277,27 @@ namespace FootballTeams.Services
             return this.presidentRepository.GetAllOrdered(p => p.FirstName);
         }
 
+        public ICollection<FootballPlayer> GetAllPlayersOfTeam(int teamId)
+        {
+            return this.playerRepository.GetAllFiltered(p => p.TeamId == teamId).ToList();
+        }
+
+        public ICollection<FootballManager> GetAllManagersOfTeam(int teamId)
+        {
+            return this.managerRepository.GetAllFiltered(m => m.TeamId == teamId).ToList();
+        }
+
         public IEnumerable<Team> GetAllTeams()
         {
             return this.teamRepository.GetAllOrdered(t => t.Name);
+        }
+
+        public IEnumerable<Team> GetAllTeamsWithIncludedEntities()
+        {
+            var entity = "team";
+            var entitiesToInclude = new string[] { "City", "Country", "FootballPresident" };
+
+            return this.teamRepository.GetAllAndIncludeEntities(entity, entitiesToInclude);
         }
     }
 }

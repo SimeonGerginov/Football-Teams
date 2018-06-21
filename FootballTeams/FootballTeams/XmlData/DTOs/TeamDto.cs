@@ -6,8 +6,8 @@ namespace FootballTeams.XmlData.DTOs
     [XmlRoot(ElementName = "team")]
     public class TeamDto
     {
-        private ICollection<FootballManagerDto> managers;
-        private ICollection<FootballPlayerDto> players;
+        private HashSet<FootballManagerDto> managers;
+        private HashSet<FootballPlayerDto> players;
 
         public TeamDto()
         {
@@ -61,14 +61,14 @@ namespace FootballTeams.XmlData.DTOs
         public FootballPresidentDto FootballPresident { get; set; }
 
         [XmlArray(ElementName = "managers")]
-        public ICollection<FootballManagerDto> FootballManagers
+        public HashSet<FootballManagerDto> FootballManagers
         {
             get { return this.managers; }
             set { this.managers = value; }
         }
 
         [XmlArray(ElementName = "players")]
-        public ICollection<FootballPlayerDto> FootballPlayers
+        public HashSet<FootballPlayerDto> FootballPlayers
         {
             get { return this.players; }
             set { this.players = value; }

@@ -5,6 +5,7 @@ using System.Xml.Serialization;
 
 using FootballTeams.Models;
 using FootballTeams.Services.Contracts;
+using FootballTeams.XmlData.DTOs;
 
 namespace FootballTeams.Services
 {
@@ -28,7 +29,7 @@ namespace FootballTeams.Services
 
             using (var writer = XmlWriter.Create(fileStream, settings))
             {
-                var xmlSerializer = new XmlSerializer(typeof(Team));
+                var xmlSerializer = new XmlSerializer(typeof(TeamDto));
                 var namespaces = new XmlSerializerNamespaces();
 
                 namespaces.Add("", "");
