@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 
 using FootballTeams.Models;
-using FootballTeams.Repositories.Contracts;
 using FootballTeams.Services.Contracts;
 using FootballTeams.XmlData.DTOs;
 

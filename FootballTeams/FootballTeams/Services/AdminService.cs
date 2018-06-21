@@ -202,7 +202,7 @@ namespace FootballTeams.Services
             }
 
             var managerExists = this.managerRepository
-                .GetAllFiltered(m => m.FirstName == managerVm.FirstName && m.LastName == managerVm.LastName
+                .GetAllFiltered(m => m.FirstName == managerVm.FirstName && m.LastName == managerVm.LastName 
                                                                         && m.TeamId == team.Id)
                 .Any();
 

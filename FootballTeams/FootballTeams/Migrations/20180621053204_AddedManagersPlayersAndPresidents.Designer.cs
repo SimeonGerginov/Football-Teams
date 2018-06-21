@@ -11,8 +11,8 @@ using System;
 namespace FootballTeams.Migrations
 {
     [DbContext(typeof(FootballTeamsContext))]
-    [Migration("20180606194311_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20180621053204_AddedManagersPlayersAndPresidents")]
+    partial class AddedManagersPlayersAndPresidents
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -68,13 +68,9 @@ namespace FootballTeams.Migrations
                         .IsRequired()
                         .HasMaxLength(30);
 
-                    b.Property<int?>("TeamId");
-
                     b.Property<int?>("TrophiesWon");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TeamId");
 
                     b.ToTable("FootballManagers");
                 });
@@ -102,13 +98,9 @@ namespace FootballTeams.Migrations
                         .IsRequired()
                         .HasMaxLength(15);
 
-                    b.Property<int?>("TeamId");
-
                     b.Property<int?>("TrophiesWon");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TeamId");
 
                     b.ToTable("FootballPlayers");
                 });
@@ -149,100 +141,11 @@ namespace FootballTeams.Migrations
                     b.ToTable("Stadiums");
                 });
 
-            modelBuilder.Entity("FootballTeams.Models.Team", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Alias")
-                        .IsRequired()
-                        .HasMaxLength(30);
-
-                    b.Property<string>("Captain")
-                        .IsRequired()
-                        .HasMaxLength(30);
-
-                    b.Property<int?>("CityId");
-
-                    b.Property<int?>("CountryId");
-
-                    b.Property<string>("Division")
-                        .IsRequired()
-                        .HasMaxLength(15);
-
-                    b.Property<int>("Established");
-
-                    b.Property<int?>("FootballPresidentId");
-
-                    b.Property<int?>("LostMatches");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30);
-
-                    b.Property<int?>("PlayedMatches");
-
-                    b.Property<string>("Region")
-                        .IsRequired()
-                        .HasMaxLength(20);
-
-                    b.Property<int?>("StadiumId");
-
-                    b.Property<int?>("Trophies");
-
-                    b.Property<int?>("WonMatches");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CityId");
-
-                    b.HasIndex("CountryId");
-
-                    b.HasIndex("FootballPresidentId");
-
-                    b.HasIndex("StadiumId");
-
-                    b.ToTable("Teams");
-                });
-
             modelBuilder.Entity("FootballTeams.Models.City", b =>
                 {
                     b.HasOne("FootballTeams.Models.Country", "Country")
                         .WithMany("Cities")
                         .HasForeignKey("CountryId");
-                });
-
-            modelBuilder.Entity("FootballTeams.Models.FootballManager", b =>
-                {
-                    b.HasOne("FootballTeams.Models.Team", "Team")
-                        .WithMany("FootballManagers")
-                        .HasForeignKey("TeamId");
-                });
-
-            modelBuilder.Entity("FootballTeams.Models.FootballPlayer", b =>
-                {
-                    b.HasOne("FootballTeams.Models.Team", "Team")
-                        .WithMany("FootballPlayers")
-                        .HasForeignKey("TeamId");
-                });
-
-            modelBuilder.Entity("FootballTeams.Models.Team", b =>
-                {
-                    b.HasOne("FootballTeams.Models.City", "City")
-                        .WithMany("Teams")
-                        .HasForeignKey("CityId");
-
-                    b.HasOne("FootballTeams.Models.Country", "Country")
-                        .WithMany("Teams")
-                        .HasForeignKey("CountryId");
-
-                    b.HasOne("FootballTeams.Models.FootballPresident", "FootballPresident")
-                        .WithMany("Teams")
-                        .HasForeignKey("FootballPresidentId");
-
-                    b.HasOne("FootballTeams.Models.Stadium", "Stadium")
-                        .WithMany("Teams")
-                        .HasForeignKey("StadiumId");
                 });
 #pragma warning restore 612, 618
         }
