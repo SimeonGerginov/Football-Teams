@@ -51,7 +51,7 @@ namespace FootballTeams.Controllers
                 this.xmlService.WriteTeamToXml(fileName, team);
             }
 
-            return this.RedirectToAction("Index", "Team");
+            return this.RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
@@ -67,7 +67,7 @@ namespace FootballTeams.Controllers
                 this.teamService.AddTeam(team);
             }
 
-            return this.RedirectToAction("Index", "Team");
+            return this.RedirectToAction("Index", "Home");
         }
     }
 }

@@ -40,7 +40,25 @@ namespace FootballTeams.Services
 
         public Team CreateTeamFromDto(TeamDto teamDto)
         {
-            throw new System.NotImplementedException();
+            var team = new Team()
+            {
+                Name = teamDto.Name,
+                Alias = teamDto.Alias,
+                Established = teamDto.Established,
+                Region = teamDto.Region,
+                Division = teamDto.Division,
+                Trophies = teamDto.Trophies,
+                Captain = teamDto.Captain,
+                PlayedMatches = teamDto.PlayedMatches,
+                WonMatches = teamDto.WonMatches,
+                LostMatches = teamDto.LostMatches,
+                StadiumId = teamDto.Stadium.Id,
+                CountryId = teamDto.Country.Id,
+                CityId = teamDto.City.Id,
+                FootballPresidentId = teamDto.FootballPresident.Id
+            };
+
+            return team;
         }
 
         private CityDto CreateCityDto(City city)
