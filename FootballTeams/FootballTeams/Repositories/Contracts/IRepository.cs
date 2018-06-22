@@ -15,5 +15,7 @@ namespace FootballTeams.Repositories.Contracts
         IEnumerable<T> GetAllOrdered(Func<T, object> orderByFunc);
 
         void Add(T entity);
+
+        void Update(T entity);
     }
 }

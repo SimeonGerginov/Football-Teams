@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using FootballTeams.Models;
 using FootballTeams.Services.Contracts;
@@ -42,12 +43,8 @@ namespace FootballTeams.Services
 
         public Team CreateTeamFromDto(TeamDto teamDto)
         {
-            var stadium = this.CreateStadiumFromDto(teamDto.Stadium);
-            var country = this.CreateCountryFromDto(teamDto.Country);
-            var city = this.CreateCityFromDto(teamDto.City);
-            var president = this.CreatePresidentFromDto(teamDto.FootballPresident);
-            var managers = this.CreateManagerCollection(teamDto.FootballManagers);
-            var players = this.CreatePlayerCollection(teamDto.FootballPlayers);
+            var managers = this.CreateManagerCollection(teamDto.FootballManagers, teamDto.Id);
+            var players = this.CreatePlayerCollection(teamDto.FootballPlayers, teamDto.Id);
 
             var team = new Team()
             {
@@ -62,13 +59,9 @@ namespace FootballTeams.Services
                 WonMatches = teamDto.WonMatches,
                 LostMatches = teamDto.LostMatches,
                 StadiumId = teamDto.Stadium.Id,
-                Stadium = stadium,
                 CountryId = teamDto.Country.Id,
-                Country = country,
                 CityId = teamDto.City.Id,
-                City = city,
                 FootballPresidentId = teamDto.FootballPresident.Id,
-                FootballPresident = president,
                 FootballManagers = managers,
                 FootballPlayers = players
             };
@@ -88,17 +81,6 @@ namespace FootballTeams.Services
             return stadiumDto;
         }
 
-        private Stadium CreateStadiumFromDto(StadiumDto stadiumDto)
-        {
-            var stadium = new Stadium()
-            {
-                Name = stadiumDto.Name,
-                Capacity = stadiumDto.Capacity
-            };
-
-            return stadium;
-        }
-
         private CityDto CreateCityDto(City city)
         {
             var cityDto = new CityDto()
@@ -109,16 +91,6 @@ namespace FootballTeams.Services
             };
 
             return cityDto;
-        }
-
-        private City CreateCityFromDto(CityDto cityDto)
-        {
-            var city = new City()
-            {
-                Name = cityDto.Name
-            };
-
-            return city;
         }
 
         private CountryDto CreateCountryDto(Country country)
@@ -132,16 +104,6 @@ namespace FootballTeams.Services
             return countryDto;
         }
 
-        private Country CreateCountryFromDto(CountryDto countryDto)
-        {
-            var country = new Country()
-            {
-                Name = countryDto.Name
-            };
-
-            return country;
-        }
-
         private FootballPresidentDto CreatePresidentDto(FootballPresident president)
         {
             var presidentDto = new FootballPresidentDto()
@@ -153,18 +115,6 @@ namespace FootballTeams.Services
             };
 
             return presidentDto;
-        }
-
-        private FootballPresident CreatePresidentFromDto(FootballPresidentDto presidentDto)
-        {
-            var president = new FootballPresident()
-            {
-                FirstName = presidentDto.FirstName,
-                LastName = presidentDto.LastName,
-                Age = presidentDto.Age
-            };
-
-            return president;
         }
 
         private FootballManagerDto CreateManagerDto(FootballManager manager)
@@ -209,12 +159,17 @@ namespace FootballTeams.Services
             return manager;
         }
 
-        private ICollection<FootballManager> CreateManagerCollection(HashSet<FootballManagerDto> managersDtos)
+        private ICollection<FootballManager> CreateManagerCollection(HashSet<FootballManagerDto> managersDtos, int teamId)
         {
             var managers = new HashSet<FootballManager>();
 
             foreach (var managerDto in managersDtos)
             {
+                if (managerDto.TeamId != teamId)
+                {
+                    throw new InvalidOperationException("Team id is invalid!");
+                }
+
                 var manager = this.CreateManagerFromDto(managerDto);
                 managers.Add(manager);
             }
@@ -268,12 +223,17 @@ namespace FootballTeams.Services
             return player;
         }
 
-        private ICollection<FootballPlayer> CreatePlayerCollection(HashSet<FootballPlayerDto> playersDtos)
+        private ICollection<FootballPlayer> CreatePlayerCollection(HashSet<FootballPlayerDto> playersDtos, int teamId)
         {
             var players = new HashSet<FootballPlayer>();
 
             foreach (var playerDto in playersDtos)
             {
+                if (playerDto.TeamId != teamId)
+                {
+                    throw new InvalidOperationException("Team id is invalid!");
+                }
+
                 var player = this.CreatePlayerFromDto(playerDto);
                 players.Add(player);
             }

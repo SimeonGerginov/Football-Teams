@@ -202,8 +202,8 @@ namespace FootballTeams.Services
             }
 
             var managerExists = this.managerRepository
-                .GetAllFiltered(m => m.FirstName == managerVm.FirstName && m.LastName == managerVm.LastName 
-                                                                        && m.TeamId == team.Id)
+                .GetAllFiltered(m => m.FirstName == managerVm.FirstName && m.LastName == managerVm.LastName
+                                     && m.TeamId == team.Id)
                 .Any();
 
             if (managerExists)
@@ -232,10 +232,10 @@ namespace FootballTeams.Services
             {
                 throw new ArgumentNullException();
             }
-
+            
             var playerExists = this.playerRepository
                 .GetAllFiltered(p => p.FirstName == playerVm.FirstName && p.LastName == playerVm.LastName
-                                                                       && p.TeamId == team.Id)
+                                     && p.TeamId == team.Id)
                 .Any();
 
             if (playerExists)

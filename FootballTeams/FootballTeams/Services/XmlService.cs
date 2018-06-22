@@ -61,6 +61,12 @@ namespace FootballTeams.Services
             {
                 var xmlSerializer = new XmlSerializer(typeof(TeamDto));
                 var teamDto = (TeamDto)xmlSerializer.Deserialize(reader);
+
+                if (!fileName.Contains(teamDto.Id.ToString()))
+                {
+                    throw new InvalidOperationException("Invalid team!");
+                }
+
                 team = this.dtoService.CreateTeamFromDto(teamDto);
             }
 

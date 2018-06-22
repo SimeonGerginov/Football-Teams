@@ -19,7 +19,7 @@ namespace FootballTeams.Services.Contracts
             int presidentId);
 
         void AddManagerToDb(ManagerViewModel managerVm, int teamId);
-
+        
         void AddPlayerToDb(PlayerViewModel playerVm, int teamId);
 
         IEnumerable<Country> GetAllCountries();

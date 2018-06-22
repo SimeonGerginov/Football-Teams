@@ -69,5 +69,17 @@ namespace FootballTeams.Repositories
         {
             this.set.Add(entity);
         }
+
+        public void Update(T entity)
+        {
+            var entry = this.context.Entry(entity);
+
+            if (entry.State == EntityState.Detached)
+            {
+                this.set.Attach(entity);
+            }
+
+            entry.State = EntityState.Modified;
+        }
     }
 }

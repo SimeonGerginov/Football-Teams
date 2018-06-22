@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using FootballTeams.Models;
@@ -48,7 +49,7 @@ namespace FootballTeams.Services
 
             if (country == null)
             {
-                this.countryRepository.Add(team.Country);
+                throw new InvalidOperationException("Country does not exist!");
             }
 
             var cityId = team.CityId ?? 0;
@@ -56,7 +57,7 @@ namespace FootballTeams.Services
 
             if (city == null)
             {
-                this.cityRepository.Add(team.City);
+                throw new InvalidOperationException("City does not exist!");
             }
 
             var stadiumId = team.StadiumId ?? 0;
@@ -64,7 +65,7 @@ namespace FootballTeams.Services
 
             if (stadium == null)
             {
-                this.stadiumRepository.Add(team.Stadium);
+                throw new InvalidOperationException("Stadium does not exist!");
             }
 
             var presidentId = team.FootballPresidentId ?? 0;
@@ -72,29 +73,67 @@ namespace FootballTeams.Services
 
             if (president == null)
             {
-                this.presidentRepository.Add(team.FootballPresident);
+                throw new InvalidOperationException("President does not exist!");
             }
+
+            var managersToRemove = new HashSet<FootballManager>();
 
             foreach (var manager in team.FootballManagers)
             {
-                var managerId = manager.Id;
-                var foundManager = this.managerRepository.GetById(managerId);
+                var foundManager = this.managerRepository.GetById(manager.Id);
 
                 if (foundManager == null)
                 {
-                    this.managerRepository.Add(manager);
+                    continue;
+                }
+
+                if (foundManager.FirstName == manager.FirstName && foundManager.LastName == manager.LastName)
+                {
+                    if (foundManager.TeamId != manager.TeamId)
+                    {
+                        foundManager.TeamId = manager.TeamId;
+                        this.managerRepository.Update(foundManager);
+                    }
+                    else
+                    {
+                        managersToRemove.Add(manager);
+                    }
                 }
             }
 
+            foreach (var managerToRemove in managersToRemove)
+            {
+                team.FootballManagers.Remove(managerToRemove);
+            }
+
+            var playersToRemove = new HashSet<FootballPlayer>();
+
             foreach (var player in team.FootballPlayers)
             {
-                var playerId = player.Id;
-                var foundPlayer = this.playerRepository.GetById(playerId);
+                var foundPlayer = this.playerRepository.GetById(player.Id);
 
                 if (foundPlayer == null)
                 {
-                    this.playerRepository.Add(player);
+                    continue;
                 }
+
+                if (foundPlayer.FirstName == player.FirstName && foundPlayer.LastName == player.LastName)
+                {
+                    if (foundPlayer.TeamId != player.TeamId)
+                    {
+                        foundPlayer.TeamId = player.TeamId;
+                        this.playerRepository.Update(foundPlayer);
+                    }
+                    else
+                    {
+                        playersToRemove.Add(player);
+                    }
+                }
+            }
+
+            foreach (var playerToRemove in playersToRemove)
+            {
+                team.FootballPlayers.Remove(playerToRemove);
             }
 
             this.teamRepository.Add(team);
