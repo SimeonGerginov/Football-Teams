@@ -20,6 +20,7 @@ namespace FootballTeams.Services
 
             var teamDto = new TeamDto()
             {
+                Id = team.Id,
                 Name = team.Name,
                 Alias = team.Alias,
                 Established = team.Established,

@@ -6,8 +6,8 @@
 <h2>Add Team</h2>
 
 <div class="row">
-    <div class="col-md-3">
-        <form asp-action="AddTeam" method="post">
+    <form class="text-center" asp-action="AddTeam" method="post">
+        <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="@Model.Name" class="control-label"></label>
                 <input asp-for="@Model.Name" class="form-control" />
@@ -37,68 +37,76 @@
                 <input asp-for="@Model.Division" class="form-control" />
                 <span asp-validation-for="@Model.Division" class="text-danger"></span>
             </div>
-
+        </div>
+        
+        <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="@Model.Trophies" class="control-label"></label>
-                <input asp-for="@Model.Trophies" class="form-control" />
+                <input asp-for="@Model.Trophies" class="form-control"/>
                 <span asp-validation-for="@Model.Trophies" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="@Model.Captain" class="control-label"></label>
-                <input asp-for="@Model.Captain" class="form-control" />
+                <input asp-for="@Model.Captain" class="form-control"/>
                 <span asp-validation-for="@Model.Captain" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="@Model.PlayedMatches" class="control-label"></label>
-                <input asp-for="@Model.PlayedMatches" class="form-control" />
+                <input asp-for="@Model.PlayedMatches" class="form-control"/>
                 <span asp-validation-for="@Model.PlayedMatches" class="text-danger"></span>
             </div>
-
+            
             <div class="form-group">
                 <label asp-for="@Model.WonMatches" class="control-label"></label>
-                <input asp-for="@Model.WonMatches" class="form-control" />
+                <input asp-for="@Model.WonMatches" class="form-control"/>
                 <span asp-validation-for="@Model.WonMatches" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="@Model.LostMatches" class="control-label"></label>
-                <input asp-for="@Model.LostMatches" class="form-control" />
+                <input asp-for="@Model.LostMatches" class="form-control"/>
                 <span asp-validation-for="@Model.LostMatches" class="text-danger"></span>
             </div>
-
+        </div>
+        
+        <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="@Model.CountryName" class="control-label"></label>
-                <select asp-for="@Model.CountryName" asp-items="@Model.CountriesSelectList"></select>
+                <select asp-for="@Model.CountryName" asp-items="@Model.CountriesSelectList"
+                        class="form-control"></select>
                 <span asp-validation-for="@Model.CountryName" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="@Model.CityName" class="control-label"></label>
-                <select asp-for="@Model.CityName" asp-items="@Model.CitieSelectList"></select>
+                <select asp-for="@Model.CityName" asp-items="@Model.CitieSelectList"
+                        class="form-control"></select>
                 <span asp-validation-for="@Model.CityName" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="@Model.StadiumName" class="control-label"></label>
-                <select asp-for="@Model.StadiumName" asp-items="@Model.StadiumsSelectList"></select>
+                <select asp-for="@Model.StadiumName" asp-items="@Model.StadiumsSelectList"
+                        class="form-control"></select>
                 <span asp-validation-for="@Model.StadiumName" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="@Model.PresidentId" class="control-label"></label>
-                <select asp-for="@Model.PresidentId" asp-items="@Model.PresidentsSelectList"></select>
+                <select asp-for="@Model.PresidentId" asp-items="@Model.PresidentsSelectList"
+                        class="form-control"></select>
                 <span asp-validation-for="@Model.PresidentId" class="text-danger"></span>
             </div>
+        </div>
 
-            <div class="form-group">
-                <input type="submit" value="Add Team" class="btn btn-default" />
-            </div>
+        <div class="form-group">
+            <input type="submit" value="Add Team" class="btn btn-default"/>
+        </div>
 
-            @Html.AntiForgeryToken()
-        </form>
-    </div>
+        @Html.AntiForgeryToken()
+    </form>
 </div>
 
 @section Scripts

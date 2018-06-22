@@ -6,8 +6,9 @@
     <title>@ViewData["Title"] - FootballTeams</title>
 
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/bootstrap.theme.css" />
+        @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />*@
+        <link rel="stylesheet" href="~/css/site.css"/>
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -26,30 +27,32 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">FootballTeams</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Футболни Отбори</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Начална страница</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="About">Информация</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Контакти</a></li>
                     
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
                            aria-haspopup="true" aria-expanded="false">
-                            Admin Panel 
+                            Админ Панел
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a asp-area="" asp-controller="Admin" asp-action="AddCountry">Add Country</a></li>
-                            <li><a asp-area="" asp-controller="Admin" asp-action="AddCity">Add City</a></li>
-                            <li><a asp-area="" asp-controller="Admin" asp-action="AddStadium">Add Stadium</a></li>
-                            <li><a asp-area="" asp-controller="Admin" asp-action="AddManager">Add Manager</a></li>
-                            <li><a asp-area="" asp-controller="Admin" asp-action="AddPlayer">Add Player</a></li>
-                            <li><a asp-area="" asp-controller="Admin" asp-action="AddPresident">Add President</a></li>
-                            <li><a asp-area="" asp-controller="Admin" asp-action="AddTeam">Add Team</a></li>
+                            <li><a asp-area="" asp-controller="Admin" asp-action="AddCountry">Добави държава</a></li>
+                            <li><a asp-area="" asp-controller="Admin" asp-action="AddCity">Добави град</a></li>
+                            <li><a asp-area="" asp-controller="Admin" asp-action="AddStadium">Добави стадион</a></li>
+                            <li><a asp-area="" asp-controller="Admin" asp-action="AddManager">Добави мениджър</a></li>
+                            <li><a asp-area="" asp-controller="Admin" asp-action="AddPlayer">Добави играч</a></li>
+                            <li><a asp-area="" asp-controller="Admin" asp-action="AddPresident">Добави президент</a></li>
+                            <li><a asp-area="" asp-controller="Admin" asp-action="AddTeam">Добави отбор</a></li>
                         </ul>
                     </li>
+                    
+                    <li><a asp-area="" asp-controller="Team" asp-action="Index">Отбори</a></li>
                 </ul>
             </div>
         </div>

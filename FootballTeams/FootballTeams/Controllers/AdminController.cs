@@ -223,7 +223,7 @@ namespace FootballTeams.Controllers
 
             this.adminService.AddPlayerToDb(playerVm, teamId);
 
-            return this.RedirectToAction("Index", "Home");
+            return this.RedirectToAction("Index", "Team");
         }
     }
 }

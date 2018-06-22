@@ -16,7 +16,8 @@
             
             <div class="form-group">
                 <label asp-for="@Model.CountryName" class="control-label"></label>
-                <select asp-for="@Model.CountryName" asp-items="@Model.CountriesSelectList"></select>
+                <select asp-for="@Model.CountryName" asp-items="@Model.CountriesSelectList"
+                        class="form-control"></select>
                 <span asp-validation-for="@Model.CountryName" class="text-danger"></span>
             </div>
 

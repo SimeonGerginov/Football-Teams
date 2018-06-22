@@ -19,31 +19,31 @@ namespace FootballTeams.ViewModels
         [Display(Name = "Име на отбор")]
         [Required(ErrorMessage = "Името на отбора е задължително")]
         [StringLength(GlobalConstants.TeamNameMaxLength, MinimumLength = GlobalConstants.TeamNameMinLength, 
-            ErrorMessage = "Името на отбора трябва да бъде между {1} и {0} символа")]
+            ErrorMessage = "Името на отбора трябва да бъде между {1} и {2} символа")]
         public string Name { get; set; }
 
         [Display(Name = "Прякор на отбор")]
         [Required(ErrorMessage = "Прякора на отбора е задължителен")]
         [StringLength(GlobalConstants.TeamAliasMaxLength, MinimumLength = GlobalConstants.TeamAliasMinLength, 
-            ErrorMessage = "Прякора на отбора трябва да бъде между {1} и {0} символа")]
+            ErrorMessage = "Прякора на отбора трябва да бъде между {1} и {2} символа")]
         public string Alias { get; set; }
 
         [Display(Name = "Основан през")]
         [Required(ErrorMessage = "Кога е основан отбора е задължително поле")]
         [Range(GlobalConstants.TeamEstablishedMinYear, GlobalConstants.TeamEstablishedMaxYear, 
-            ErrorMessage = "Отбора трябва да е основан в периода между {0} и {1} година")]
+            ErrorMessage = "Отбора трябва да е основан в периода между {1} и {2} година")]
         public int Established { get; set; }
 
         [Display(Name = "Регион на отбора")]
         [Required(ErrorMessage = "Региона на отбора е задължителен")]
         [StringLength(GlobalConstants.TeamRegionMaxLength, MinimumLength = GlobalConstants.TeamRegionMinLength, 
-            ErrorMessage = "Региона трябва да бъде между {1} и {0} символа")]
+            ErrorMessage = "Региона трябва да бъде между {1} и {2} символа")]
         public string Region { get; set; }
 
         [Display(Name = "Дивизия, в която играе отбора")]
         [Required(ErrorMessage = "Дивизията на отбора е задължителна")]
         [StringLength(GlobalConstants.TeamDivisionMaxLength, MinimumLength = GlobalConstants.TeamDivisionMinLength, 
-            ErrorMessage = "Дивизията на отбора трябва да бъде между {1} и {0} символа")]
+            ErrorMessage = "Дивизията на отбора трябва да бъде между {1} и {2} символа")]
         public string Division { get; set; }
 
         [Display(Name = "Трофеи, спечелени от отбора")]
@@ -53,7 +53,7 @@ namespace FootballTeams.ViewModels
         [Required(ErrorMessage = "Капитана е задължително поле")]
         [StringLength(GlobalConstants.TeamCaptainNameMaxLength, 
             MinimumLength = GlobalConstants.TeamCaptainNameMinLength, 
-            ErrorMessage = "Името на капитана на отбора трябва да бъде между {1} и {0} символа")]
+            ErrorMessage = "Името на капитана на отбора трябва да бъде между {1} и {2} символа")]
         public string Captain { get; set; }
 
         [Display(Name = "Изиграни мачове")]
