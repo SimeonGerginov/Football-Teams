@@ -1,23 +1,73 @@
-﻿@model IEnumerable<Team>
+﻿@model IEnumerable<FootballTeams.ViewModels.AllTeamsViewModel>
 
 @{
     ViewBag.Title = "Teams Page";
     Layout = "_Layout";
 }
 
-<h2>Admin Panel</h2>
+<h2 class="text-center">
+    Отбори
+</h2>
 
-<div class="form-group">
+<div class="row">
+    @if (Model.Any())
+    {
+        <table class="table">
+            <tr>
+                <th class="text-center">
+                    Име на отбора
+                </th>
+                <th class="text-center">
+                    Прякор на отбора
+                </th>
+                <th class="text-center">
+                    Година на основаване
+                </th>
+                <th class="text-center">
+                    Детайли за отбора
+                </th>
+            </tr>
+            @foreach (var teamViewModel in Model)
+            {
+                <tr>
+                    <td class="text-center">
+                        @teamViewModel.Name
+                    </td>
+                    <td class="text-center">
+                        @teamViewModel.Alias
+                    </td>
+                    <td class="text-center">
+                        @teamViewModel.Established
+                    </td>
+                    <td class="text-center">
+                        <a class="btn btn-info" asp-controller="Team" asp-action="TeamDetails" 
+                           asp-route-teamId="@teamViewModel.Id">
+                            Детайли
+                        </a>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <h4>
+            There are no teams at the moment. Check again later.
+        </h4>
+    }
+</div>
+
+<div class="form-group text-center">
     <form asp-action="ExportData" method="post">
-        <input type="submit" value="Export Data" class="btn btn-info"/>
+        <input type="submit" value="Export Data" class="btn btn-warning"/>
         
         @Html.AntiForgeryToken()
     </form>
 </div>
 
-<div class="form-group">
+<div class="form-group text-center">
     <form asp-action="ImportData" method="post">
-        <input type="submit" value="Import Data" class="btn btn-info" />
+        <input type="submit" value="Import Data" class="btn btn-warning" />
 
         @Html.AntiForgeryToken()
     </form>

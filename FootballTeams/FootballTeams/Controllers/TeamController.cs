@@ -25,7 +25,17 @@ namespace FootballTeams.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return this.View();
+            var teams = this.teamService.GetAllTeams();
+
+            return this.View(teams);
+        }
+
+        [HttpGet]
+        public IActionResult TeamDetails(int teamId)
+        {
+            var teamDetails = this.teamService.GetTeamDetails(teamId);
+
+            return this.View(teamDetails);
         }
 
         [HttpPost]

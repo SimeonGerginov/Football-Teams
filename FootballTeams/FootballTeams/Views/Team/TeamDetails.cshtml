@@ -1,0 +1,57 @@
+﻿@model FootballTeams.ViewModels.TeamDetailsViewModel
+@{
+    ViewData["Title"] = "TeamDetails";
+}
+
+<h2 class="text-center">
+    Детайли за отбора
+</h2>
+
+<ul class="list-group">
+    <li class="list-group-item text-center">
+        Име на отбора:
+        <h4>
+            @Model.Name
+        </h4>
+    </li>
+    <li class="list-group-item text-center">
+        Прякор на отбора:
+        <h4>
+            @Model.Alias
+        </h4>
+    </li>
+    <li class="list-group-item text-center">
+        Капитан:
+        <h4>
+            @Model.Captain
+        </h4>
+    </li>
+    <li class="list-group-item text-center">
+        Година на основаване:
+        <h4>
+            @Model.Established
+        </h4>
+    </li>
+    <li class="list-group-item text-center">
+        Дивизия:
+        <h4>
+            @Model.Division
+        </h4>
+    </li>
+    <li class="list-group-item text-center">
+        Регион:
+        <h4>
+            @Model.Region
+        </h4>
+    </li>
+    <li class="list-group-item text-center">
+        Спечелени трофеи:
+        <h4>
+            @Model.Trophies
+        </h4>
+    </li>
+</ul>
+
+<a class="btn btn-info" asp-controller="Team" asp-action="Index">
+    Назад
+</a>

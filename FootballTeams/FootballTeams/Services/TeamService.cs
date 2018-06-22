@@ -5,6 +5,7 @@ using System.Linq;
 using FootballTeams.Models;
 using FootballTeams.Repositories.Contracts;
 using FootballTeams.Services.Contracts;
+using FootballTeams.ViewModels;
 
 namespace FootballTeams.Services
 {
@@ -41,7 +42,8 @@ namespace FootballTeams.Services
 
             if (teamExists)
             {
-                throw new InvalidOperationException("Team already exists!");
+                return;
+                // throw new InvalidOperationException("Team already exists!");
             }
 
             var countryId = team.CountryId ?? 0;
@@ -137,6 +139,41 @@ namespace FootballTeams.Services
             }
 
             this.teamRepository.Add(team);
+        }
+
+        public TeamDetailsViewModel GetTeamDetails(int teamId)
+        {
+            var team = this.teamRepository.GetById(teamId);
+            var teamDetails = new TeamDetailsViewModel();
+
+            if (team != null)
+            {
+                teamDetails.Name = team.Name;
+                teamDetails.Alias = team.Alias;
+                teamDetails.Captain = team.Captain;
+                teamDetails.Division = team.Division;
+                teamDetails.Established = team.Established;
+                teamDetails.Region = team.Region;
+                teamDetails.Trophies = team.Trophies ?? 0;
+            }
+
+            return teamDetails;
+        }
+
+        public IEnumerable<AllTeamsViewModel> GetAllTeams()
+        {
+            var teamsToTake = 10;
+
+            return this.teamRepository
+                .GetAllOrdered(t => t.Name)
+                .Take(teamsToTake)
+                .Select(t => new AllTeamsViewModel()
+                {
+                    Id = t.Id,
+                    Name = t.Name,
+                    Alias = t.Alias,
+                    Established = t.Established
+                });
         }
     }
 }
