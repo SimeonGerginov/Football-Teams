@@ -38,6 +38,11 @@ namespace FootballTeams.Services
                                                          && t.Established == team.Established)
                 .Any();
 
+            if (teamExists)
+            {
+                throw new InvalidOperationException("Team already exists!");
+            }
+
             var countryId = team.CountryId ?? 0;
             var country = this.countryRepository.GetById(countryId);
 
@@ -67,7 +72,7 @@ namespace FootballTeams.Services
 
             if (president == null)
             {
-                this.presidentRepository.Add(president);
+                this.presidentRepository.Add(team.FootballPresident);
             }
 
             foreach (var manager in team.FootballManagers)
@@ -90,11 +95,6 @@ namespace FootballTeams.Services
                 {
                     this.playerRepository.Add(player);
                 }
-            }
-
-            if (teamExists)
-            {
-                throw new InvalidOperationException("Team already exists!");
             }
 
             this.teamRepository.Add(team);

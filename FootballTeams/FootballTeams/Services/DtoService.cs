@@ -115,8 +115,7 @@ namespace FootballTeams.Services
         {
             var city = new City()
             {
-                Name = cityDto.Name,
-                CountryId = cityDto.CountryId
+                Name = cityDto.Name
             };
 
             return city;

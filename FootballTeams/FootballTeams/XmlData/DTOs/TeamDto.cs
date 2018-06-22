@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace FootballTeams.XmlData.DTOs
 {
-    [XmlRoot(ElementName = "team")]
+    [XmlRoot(ElementName = "team", Namespace = "")]
     public class TeamDto
     {
         private HashSet<FootballManagerDto> managers;
@@ -27,11 +27,31 @@ namespace FootballTeams.XmlData.DTOs
         [XmlElement(ElementName = "established")]
         public int Established { get; set; }
 
+        [XmlElement("stadium")]
+        public StadiumDto Stadium { get; set; }
+
+        [XmlElement("country")]
+        public CountryDto Country { get; set; }
+
         [XmlElement(ElementName = "region")]
         public string Region { get; set; }
 
+        [XmlElement("city")]
+        public CityDto City { get; set; }
+
         [XmlElement(ElementName = "division")]
         public string Division { get; set; }
+
+        [XmlElement("president")]
+        public FootballPresidentDto FootballPresident { get; set; }
+
+        [XmlArray(ElementName = "managers")]
+        [XmlArrayItem(ElementName = "manager")]
+        public HashSet<FootballManagerDto> FootballManagers
+        {
+            get { return this.managers; }
+            set { this.managers = value; }
+        }
 
         [XmlElement(ElementName = "trophies")]
         public int? Trophies { get; set; }
@@ -47,26 +67,6 @@ namespace FootballTeams.XmlData.DTOs
 
         [XmlElement(ElementName = "lost_matches")]
         public int? LostMatches { get; set; }
-        
-        [XmlElement("stadium")]
-        public StadiumDto Stadium { get; set; }
-
-        [XmlElement("city")]
-        public CityDto City { get; set; }
-
-        [XmlElement("country")]
-        public CountryDto Country { get; set; }
-
-        [XmlElement("president")]
-        public FootballPresidentDto FootballPresident { get; set; }
-
-        [XmlArray(ElementName = "managers")]
-        [XmlArrayItem(ElementName = "manager")]
-        public HashSet<FootballManagerDto> FootballManagers
-        {
-            get { return this.managers; }
-            set { this.managers = value; }
-        }
 
         [XmlArray(ElementName = "players")]
         [XmlArrayItem(ElementName = "player")]

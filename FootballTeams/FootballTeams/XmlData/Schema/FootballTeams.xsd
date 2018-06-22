@@ -12,7 +12,7 @@
         <xs:element ref="city"/>
 		<xs:element ref="division"/>
         <xs:element ref="president"/>
-        <xs:element ref="manager"/>
+        <xs:element ref="managers"/>
         <xs:element ref="trophies"/>
 		<xs:element ref="captain"/>
 		<xs:element ref="played_matches"/>

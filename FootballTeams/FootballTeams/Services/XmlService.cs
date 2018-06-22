@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Xml;
+using System.Xml.Schema;
 using System.Xml.Serialization;
 
 using FootballTeams.Models;
@@ -43,11 +44,16 @@ namespace FootballTeams.Services
         {
             Team team;
             var settings = new XmlReaderSettings();
+            var schemas = new XmlSchemaSet();
 
-            settings.DtdProcessing = DtdProcessing.Parse;
-            settings.ValidationType = ValidationType.DTD;
-            settings.XmlResolver = new XmlUrlResolver();
+            var schemaUri = "../FootballTeams/XmlData/Schema/FootballTeams.xsd";
+
+            schemas.Add(null, schemaUri);
+
+            settings.DtdProcessing = DtdProcessing.Ignore;
+            settings.ValidationType = ValidationType.Schema;
             settings.CloseInput = true;
+            settings.Schemas = schemas;
 
             var fileStream = new FileStream(fileName, FileMode.Open);
 
