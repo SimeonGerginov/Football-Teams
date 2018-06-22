@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
+using FootballTeams.Infrastructure;
+
 namespace FootballTeams.Models
 {
     public class Team
@@ -18,28 +20,30 @@ namespace FootballTeams.Models
         public int Id { get; set; }
         
         [Required]
-        [MaxLength(30)]
+        [StringLength(GlobalConstants.TeamNameMaxLength, MinimumLength = GlobalConstants.TeamNameMinLength)]
         public string Name { get; set; }
         
         [Required]
-        [MaxLength(30)]
+        [StringLength(GlobalConstants.TeamAliasMaxLength, MinimumLength = GlobalConstants.TeamAliasMinLength)]
         public string Alias { get; set; }
         
         [Required]
+        [Range(GlobalConstants.TeamEstablishedMinYear, GlobalConstants.TeamEstablishedMaxYear)]
         public int Established { get; set; }
         
         [Required]
-        [MaxLength(20)]
+        [StringLength(GlobalConstants.TeamRegionMaxLength, MinimumLength = GlobalConstants.TeamRegionMinLength)]
         public string Region { get; set; }
         
         [Required]
-        [MaxLength(15)]
+        [StringLength(GlobalConstants.TeamDivisionMaxLength, MinimumLength = GlobalConstants.TeamDivisionMinLength)]
         public string Division { get; set; }
         
         public int? Trophies { get; set; }
         
         [Required]
-        [MaxLength(30)]
+        [StringLength(GlobalConstants.TeamCaptainNameMaxLength,
+            MinimumLength = GlobalConstants.TeamCaptainNameMinLength)]
         public string Captain { get; set; }
         
         public int? PlayedMatches { get; set; }

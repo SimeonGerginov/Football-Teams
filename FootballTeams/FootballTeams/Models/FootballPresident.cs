@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
+using FootballTeams.Infrastructure;
+
 namespace FootballTeams.Models
 {
     public class FootballPresident
@@ -16,14 +18,17 @@ namespace FootballTeams.Models
         public int Id { get; set; }
         
         [Required]
-        [MaxLength(30)]
+        [StringLength(GlobalConstants.PresidentFirstNameMaxLength,
+            MinimumLength = GlobalConstants.PresidentFirstNameMinLength)]
         public string FirstName { get; set; }
         
         [Required]
-        [MaxLength(30)]
+        [StringLength(GlobalConstants.PresidentLastNameMaxLength,
+            MinimumLength = GlobalConstants.PresidentLastNameMinLength)]
         public string LastName { get; set; }
         
         [Required]
+        [Range(GlobalConstants.PresidentMinAge, GlobalConstants.PresidentMaxAge)]
         public int Age { get; set; }
 
         public ICollection<Team> Teams

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
+using FootballTeams.Infrastructure;
+
 namespace FootballTeams.Models
 {
     public class Stadium
@@ -16,10 +18,11 @@ namespace FootballTeams.Models
         public int Id { get; set; }
         
         [Required]
-        [MaxLength(30)]
+        [StringLength(GlobalConstants.StadiumNameMaxLength, MinimumLength = GlobalConstants.StadiumNameMinLength)]
         public string Name { get; set; }
         
         [Required]
+        [Range(GlobalConstants.MinCapacity, GlobalConstants.MaxCapacity)]
         public int Capacity { get; set; }
 
         public ICollection<Team> Teams

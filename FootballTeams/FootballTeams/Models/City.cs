@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
+using FootballTeams.Infrastructure;
+
 namespace FootballTeams.Models
 {
     public class City
@@ -16,7 +18,7 @@ namespace FootballTeams.Models
         public int Id { get; set; }
         
         [Required]
-        [MaxLength(30)]
+        [StringLength(GlobalConstants.CityNameMaxLength, MinimumLength = GlobalConstants.CityNameMinLength)]
         public string Name { get; set; }
         
         public int? CountryId { get; set; }

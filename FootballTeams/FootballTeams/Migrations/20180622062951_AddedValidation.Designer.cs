@@ -3,13 +3,18 @@ using FootballTeams.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore.Storage.Internal;
+using System;
 
 namespace FootballTeams.Migrations
 {
     [DbContext(typeof(FootballTeamsContext))]
-    partial class FootballTeamsContextModelSnapshot : ModelSnapshot
+    [Migration("20180622062951_AddedValidation")]
+    partial class AddedValidation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

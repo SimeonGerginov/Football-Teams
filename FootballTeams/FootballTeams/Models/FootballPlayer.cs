@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using FootballTeams.Infrastructure;
 
 namespace FootballTeams.Models
 {
@@ -8,22 +9,26 @@ namespace FootballTeams.Models
         public int Id { get; set; }
         
         [Required]
-        [MaxLength(30)]
+        [StringLength(GlobalConstants.PlayerFirstNameMaxLength,
+            MinimumLength = GlobalConstants.PlayerFirstNameMinLength)]
         public string FirstName { get; set; }
         
         [Required]
-        [MaxLength(30)]
+        [StringLength(GlobalConstants.PlayerLastNameMaxLength,
+            MinimumLength = GlobalConstants.PlayerLastNameMinLength)]
         public string LastName { get; set; }
         
         [Required]
+        [Range(GlobalConstants.PlayerMinAge, GlobalConstants.PlayerMaxAge)]
         public int Age { get; set; }
         
         [Required]
-        [MaxLength(15)]
+        [StringLength(GlobalConstants.PlayerPositionMaxLength, MinimumLength = GlobalConstants.PlayerPositionMinLength)]
         public string Position { get; set; }
         
         [Required]
-        [MaxLength(30)]
+        [StringLength(GlobalConstants.PlayerNationalityMaxLength,
+            MinimumLength = GlobalConstants.PlayerNationalityMinLength)]
         public string Nationality { get; set; }
         
         public int? TrophiesWon { get; set; }
