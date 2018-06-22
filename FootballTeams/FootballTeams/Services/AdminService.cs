@@ -295,7 +295,7 @@ namespace FootballTeams.Services
         public IEnumerable<Team> GetAllTeamsWithIncludedEntities()
         {
             var entity = "team";
-            var entitiesToInclude = new string[] { "City", "Country", "FootballPresident" };
+            var entitiesToInclude = new string[] { "Stadium", "City", "Country", "FootballPresident" };
 
             return this.teamRepository.GetAllAndIncludeEntities(entity, entitiesToInclude);
         }

@@ -41,6 +41,7 @@ namespace FootballTeams.Repositories
                     .Include(entitiesToInclude[0])
                     .Include(entitiesToInclude[1])
                     .Include(entitiesToInclude[2])
+                    .Include(entitiesToInclude[3])
                     .AsEnumerable();
             }
             else
